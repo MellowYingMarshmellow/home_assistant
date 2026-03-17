@@ -3,9 +3,9 @@
   "name": "PainCave",
   "version": "1.0.0",
   "config_flow": true,
-  "documentation": "https://github.com/your-repo/paincave_v2",
+  "documentation": "https://github.com/MellowYingMarshmellow/home_assistant/tree/main/custom_components/paincave",
   "iot_class": "local_polling",
   "dependencies": [],
-  "codeowners": [],
+  "codeowners": ["@MellowYingMarshmellow"],
   "requirements": []
 }

@@ -3,9 +3,9 @@
   "name": "Intervals ICU",
   "version": "1.0.0",
   "config_flow": true,
-  "documentation": "https://intervals.icu",
+  "documentation": "https://github.com/MellowYingMarshmellow/home_assistant/tree/main/custom_components/intervals_icu",
   "requirements": [],
   "dependencies": [],
-  "codeowners": [],
+  "codeowners": ["@MellowYingMarshmellow"],
   "iot_class": "cloud_polling"
 }

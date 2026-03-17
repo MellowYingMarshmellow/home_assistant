@@ -1,0 +1,21 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "MyWhoosh",
+        "description": "Enter your MyWhoosh account credentials.",
+        "data": {
+          "username": "Email / Username",
+          "password": "Password"
+        }
+      }
+    },
+    "error": {
+      "cannot_connect": "Cannot connect to MyWhoosh — check your network",
+      "invalid_auth":   "Invalid username or password"
+    },
+    "abort": {
+      "already_configured": "This MyWhoosh account is already configured"
+    }
+  }
+}

@@ -1,0 +1,100 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Intervals ICU",
+        "description": "Connect to your Intervals.icu account.\n\nFind your **Athlete ID** in your profile URL (e.g. `i12345`).\nGenerate an **API key** in Settings → Developer Settings.",
+        "data": {
+          "athlete_id": "Athlete ID",
+          "api_key":    "API Key"
+        }
+      }
+    },
+    "error": {
+      "cannot_connect":     "Cannot connect to Intervals ICU — check the athlete ID and your network",
+      "invalid_auth":       "Invalid API key",
+      "invalid_athlete_id": "Athlete ID not found — double-check the ID from your profile URL"
+    },
+    "abort": {
+      "already_configured": "This Intervals ICU athlete is already configured"
+    }
+  },
+  "services": {
+    "update_wellness": {
+      "name": "Update Wellness",
+      "description": "Push wellness data to Intervals ICU for a given date. Include only the fields you want to update.",
+      "fields": {
+        "date":        { "name": "Date",              "description": "YYYY-MM-DD. Defaults to today." },
+        "weight":      { "name": "Weight (kg)",       "description": "Body weight in kilograms." },
+        "resting_hr":  { "name": "Resting HR",        "description": "Resting heart rate in bpm." },
+        "hrv":         { "name": "HRV rMSSD (ms)",    "description": "Heart rate variability rMSSD." },
+        "sleep_secs":  { "name": "Sleep (seconds)",   "description": "Sleep duration in seconds (7h = 25200)." },
+        "sleep_score": { "name": "Sleep Score",       "description": "Sleep quality score (0-100)." },
+        "steps":       { "name": "Steps",             "description": "Daily step count." },
+        "vo2max":      { "name": "VO2 Max",           "description": "VO2 max in ml/kg/min." },
+        "respiration": { "name": "Respiration",       "description": "Resting respiration rate (breaths/min)." },
+        "soreness":    { "name": "Soreness (1-10)",   "description": "Muscle soreness." },
+        "fatigue":     { "name": "Fatigue (1-10)",    "description": "Perceived fatigue." },
+        "stress":      { "name": "Stress (1-10)",     "description": "Life stress level." },
+        "mood":        { "name": "Mood (1-10)",       "description": "Mood." },
+        "motivation":  { "name": "Motivation (1-10)", "description": "Motivation to train." },
+        "notes":       { "name": "Notes",             "description": "Free-text wellness notes." }
+      }
+    },
+    "create_manual_activity": {
+      "name": "Create Manual Activity",
+      "description": "Create a manual activity in Intervals ICU.",
+      "fields": {
+        "name":                 { "name": "Name",                 "description": "Activity name." },
+        "description":          { "name": "Description",          "description": "Activity notes." },
+        "type":                 { "name": "Sport Type",           "description": "e.g. Ride, VirtualRide, Run. Default: Ride." },
+        "start_date_local":     { "name": "Start Date/Time",      "description": "ISO datetime e.g. 2025-03-14T07:30:00" },
+        "moving_time":          { "name": "Duration (seconds)",   "description": "Moving time in seconds." },
+        "distance":             { "name": "Distance (metres)",    "description": "Distance in metres." },
+        "average_heartrate":    { "name": "Avg HR",               "description": "Average heart rate (bpm)." },
+        "max_heartrate":        { "name": "Max HR",               "description": "Max heart rate (bpm)." },
+        "average_watts":        { "name": "Avg Power (W)",        "description": "Average power in watts." },
+        "max_watts":            { "name": "Max Power (W)",        "description": "Max power in watts." },
+        "kilojoules":           { "name": "Energy (kJ)",          "description": "Total energy output in kilojoules." },
+        "normalized_power":     { "name": "Normalized Power (W)", "description": "Normalized/weighted average power." },
+        "total_elevation_gain": { "name": "Elevation (m)",        "description": "Total elevation gain in metres." },
+        "feel":                 { "name": "Feel / RPE (1-10)",    "description": "Perceived exertion 1-10." },
+        "external_id":          { "name": "External ID",          "description": "External reference ID." }
+      }
+    },
+    "update_activity": {
+      "name": "Update Activity",
+      "description": "Update fields on an existing activity.",
+      "fields": {
+        "activity_id":  { "name": "Activity ID",  "description": "Intervals ICU activity ID." },
+        "name":         { "name": "Name",         "description": "New activity name." },
+        "description":  { "name": "Description",  "description": "Activity notes." },
+        "feel":         { "name": "Feel (1-10)",  "description": "Perceived exertion." },
+        "icu_rpe":      { "name": "RPE (1-10)",   "description": "Rate of perceived exertion." }
+      }
+    },
+    "update_athlete": {
+      "name": "Update Athlete Profile",
+      "description": "Update fields on the athlete profile.",
+      "fields": {
+        "weight":     { "name": "Weight (kg)",  "description": "Body weight in kilograms." },
+        "max_hr":     { "name": "Max HR",       "description": "Maximum heart rate." },
+        "resting_hr": { "name": "Resting HR",   "description": "Resting heart rate." },
+        "icu_notes":  { "name": "Notes",        "description": "Athlete notes." },
+        "icu_tags":   { "name": "Tags",         "description": "Comma-separated tags." }
+      }
+    },
+    "update_sport_settings": {
+      "name": "Update Sport Settings",
+      "description": "Update threshold values for a specific sport.",
+      "fields": {
+        "type":           { "name": "Sport Type",           "description": "e.g. Ride, Run, Swim." },
+        "ftp":            { "name": "FTP (W)",              "description": "Functional Threshold Power." },
+        "indoor_ftp":     { "name": "Indoor FTP (W)",       "description": "Indoor FTP." },
+        "lthr":           { "name": "LTHR (bpm)",           "description": "Lactate Threshold Heart Rate." },
+        "max_hr":         { "name": "Max HR (bpm)",         "description": "Max heart rate for this sport." },
+        "threshold_pace": { "name": "Threshold Pace (m/s)", "description": "Threshold pace for running." }
+      }
+    }
+  }
+}

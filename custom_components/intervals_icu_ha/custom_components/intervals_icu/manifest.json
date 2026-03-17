@@ -1,0 +1,11 @@
+{
+  "domain": "intervals_icu",
+  "name": "Intervals ICU",
+  "version": "1.0.0",
+  "config_flow": true,
+  "documentation": "https://intervals.icu",
+  "requirements": [],
+  "dependencies": [],
+  "codeowners": [],
+  "iot_class": "cloud_polling"
+}

@@ -1,0 +1,23 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Connect to PainCave",
+        "description": "Enter the address and credentials for your PainCave hub.",
+        "data": {
+          "url":      "PainCave URL",
+          "email":    "Email address",
+          "password": "Password"
+        }
+      }
+    },
+    "error": {
+      "cannot_connect": "Cannot reach PainCave. Check the URL and make sure the service is running.",
+      "invalid_auth":   "Invalid email or password.",
+      "unknown":        "Unexpected error. Check the HA logs."
+    },
+    "abort": {
+      "already_configured": "PainCave is already configured for this URL."
+    }
+  }
+}

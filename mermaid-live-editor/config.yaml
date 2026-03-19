@@ -1,5 +1,5 @@
 name: Mermaid Live Editor
-version: "2.0.67"
+version: "2.0.68"
 slug: mermaid_live_editor
 description: >
   Mermaid Live Editor — create, edit, and preview Mermaid diagrams in your
@@ -13,17 +13,14 @@ arch:
   - armv7
 startup: application
 boot: manual
-# Ingress: HA proxies the web UI through its own interface and adds it to the sidebar.
-# panel_icon and panel_title control the sidebar entry.
 ingress: true
 ingress_port: 8099
-# Port also kept for direct browser access at http://homeassistant.local:8099
+panel_icon: mdi:vector-polyline
+panel_title: Mermaid Editor
 ports:
   8099/tcp: 8099
 ports_description:
-  8099/tcp: Mermaid Live Editor web interface (direct access)
-panel_icon: mdi:vector-polyline
-panel_title: Mermaid Editor
+  8099/tcp: Mermaid Live Editor web interface
 homeassistant: "2024.1.0"
 map: []
 options: {}

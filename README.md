@@ -42,26 +42,11 @@ Mermaid diagram type — accessible from your browser on your local network.
 2. Find **Mermaid Live Editor** in the Add-on Store
 3. Click **Install** — the build takes ~2–3 minutes (clones source, builds with Node 22, packages with nginx)
 4. Click **Start**
-5. **Mermaid Editor** appears automatically in the HA left sidebar — click it to open
-
-> **Direct URL also available:** `http://homeassistant.local:8099`
+5. Open `http://homeassistant.local:8099` to confirm it's running
 
 #### Sidebar
 
-The addon uses HA **ingress** — the Mermaid Editor panel appears in the sidebar automatically after install and start. No extra configuration needed. Click the `mdi:vector-polyline` icon in the left nav to switch to it at any time.
-
-If the sidebar icon doesn't appear (older HA versions), add this to `configuration.yaml` as a fallback:
-
-```yaml
-panel_iframe:
-  mermaid_editor:
-    title: "Mermaid Editor"
-    icon: mdi:vector-polyline
-    url: "http://homeassistant.local:8099"
-    require_admin: false
-```
-
-Then go to **Developer Tools → YAML → Check configuration** and restart HA.
+The addon uses HA's built-in ingress, so the **Mermaid Editor** entry appears automatically in the left sidebar after the addon starts. No `configuration.yaml` changes needed.
 
 #### What runs inside
 

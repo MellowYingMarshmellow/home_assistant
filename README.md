@@ -1,23 +1,87 @@
-# Home Assistant Custom Integrations
+# Home Assistant Custom Integrations & Add-ons
 
-A collection of custom Home Assistant integrations installable via [HACS](https://hacs.xyz).
-
----
-
-## Integrations
-
-| Integration | Type | Description |
-|-------------|------|-------------|
-| [PainCave](#paincave) | Local polling | ANT+/Bluetooth sensor hub integration |
-| [Intervals ICU](#intervals-icu) | Cloud polling | Training analytics & wellness tracking |
-| [MyWhoosh](#mywhoosh) | Cloud polling | Indoor cycling platform stats |
+A collection of custom Home Assistant integrations (via HACS) and add-ons (via Supervisor).
 
 ---
 
-## Installation via HACS
+## Contents
+
+| Name | Type | Install via | Description |
+|------|------|-------------|-------------|
+| [PainCave](#paincave) | Integration | HACS | ANT+/Bluetooth sensor hub |
+| [Intervals ICU](#intervals-icu) | Integration | HACS | Training analytics & wellness tracking |
+| [MyWhoosh](#mywhoosh) | Integration | HACS | Indoor cycling platform stats |
+| [Mermaid Live Editor](#mermaid-live-editor) | Add-on | Supervisor | Mermaid diagram editor in your browser |
+
+---
+
+## Add-ons
+
+### Installing this repository as an Add-on source
+
+> Requires Home Assistant OS or Supervised installation (Add-on Supervisor must be present).
+
+1. Go to **Settings → Add-ons → Add-on Store**
+2. Click **⋮ (menu) → Repositories**
+3. Add: `https://github.com/MellowYingMarshmellow/home_assistant`
+4. The add-ons from this repo will appear in the store
+
+---
+
+### Mermaid Live Editor
+
+Run the [Mermaid Live Editor](https://github.com/mermaid-js/mermaid-live-editor) as a local
+add-on. Create flowcharts, sequence diagrams, Gantt charts, ERDs, C4 diagrams, and every other
+Mermaid diagram type — accessible from your browser on your local network.
+
+**No cloud dependency. Runs entirely on your HA host.**
+
+#### Install
+
+1. Add this repository (instructions above)
+2. Find **Mermaid Live Editor** in the Add-on Store
+3. Click **Install** — the build takes ~2–3 minutes (clones source, builds with Node 22, packages with nginx)
+4. Click **Start**
+5. **Mermaid Editor** appears automatically in the HA left sidebar — click it to open
+
+> **Direct URL also available:** `http://homeassistant.local:8099`
+
+#### Sidebar
+
+The addon uses HA **ingress** — the Mermaid Editor panel appears in the sidebar automatically after install and start. No extra configuration needed. Click the `mdi:vector-polyline` icon in the left nav to switch to it at any time.
+
+If the sidebar icon doesn't appear (older HA versions), add this to `configuration.yaml` as a fallback:
+
+```yaml
+panel_iframe:
+  mermaid_editor:
+    title: "Mermaid Editor"
+    icon: mdi:vector-polyline
+    url: "http://homeassistant.local:8099"
+    require_admin: false
+```
+
+Then go to **Developer Tools → YAML → Check configuration** and restart HA.
+
+#### What runs inside
+
+| | |
+|---|---|
+| Port | `8099` |
+| Architectures | amd64, aarch64, armv7, armhf |
+| Node.js | 22 (inside Docker — not required on your machine) |
+| Java | Not required |
+| Base image | `ghcr.io/home-assistant/amd64-base` (per arch) |
+| Web server | nginx |
+
+---
+
+## Integrations (HACS)
+
+### Installing via HACS
 
 1. Open HACS in Home Assistant
-2. Go to **Integrations** → ⋮ (menu) → **Custom repositories**
+2. Go to **Integrations → ⋮ → Custom repositories**
 3. Add `https://github.com/MellowYingMarshmellow/home_assistant` as category **Integration**
 4. Click **Download** on the repository
 5. Restart Home Assistant
@@ -25,11 +89,11 @@ A collection of custom Home Assistant integrations installable via [HACS](https:
 
 ---
 
-## PainCave
+### PainCave
 
 Connects your [PainCave](https://github.com/MellowYingMarshmellow/home_assistant/tree/main/custom_components/paincave) ANT+/Bluetooth sensor hub to Home Assistant.
 
-### What it creates
+#### What it creates
 
 | Entity | Description |
 |--------|-------------|
@@ -37,7 +101,7 @@ Connects your [PainCave](https://github.com/MellowYingMarshmellow/home_assistant
 | `switch` | Enable/disable individual sensors, ANT+ scanning, BLE scanning |
 | `binary_sensor` | ANT+ stick connected, BLE adapter active |
 
-### Setup
+#### Setup
 
 1. **Settings → Devices & Services → Add Integration → PainCave**
 2. Enter:
@@ -45,26 +109,26 @@ Connects your [PainCave](https://github.com/MellowYingMarshmellow/home_assistant
    - **Email** — your PainCave account email
    - **Password** — your PainCave account password
 
-Polling interval defaults to 5 seconds (configurable in `const.py`).
+Polling interval defaults to 5 seconds.
 
 ---
 
-## Intervals ICU
+### Intervals ICU
 
 Syncs your [Intervals.icu](https://intervals.icu) training data to Home Assistant sensors, and exposes HA services to push wellness data back.
 
-### What it creates
+#### What it creates
 
 Sensors for your athlete metrics: fitness, fatigue, form (CTL/ATL/TSB), recent activity stats, and more.
 
-### Setup
+#### Setup
 
 1. **Settings → Devices & Services → Add Integration → Intervals ICU**
 2. Enter:
    - **Athlete ID** — from your Intervals.icu profile URL (e.g. `i12345`)
    - **API Key** — from Settings → Developer Settings
 
-### Services
+#### Services
 
 | Service | Description |
 |---------|-------------|
@@ -76,15 +140,15 @@ Sensors for your athlete metrics: fitness, fatigue, form (CTL/ATL/TSB), recent a
 
 ---
 
-## MyWhoosh
+### MyWhoosh
 
 Pulls your [MyWhoosh](https://www.mywhoosh.com) indoor cycling stats into Home Assistant.
 
-### What it creates
+#### What it creates
 
 Sensors for distance, ride count, fitness rank, and more. Number entities for adjustable bike settings.
 
-### Setup
+#### Setup
 
 1. **Settings → Devices & Services → Add Integration → MyWhoosh**
 2. Enter your MyWhoosh **email** and **password**
@@ -93,10 +157,9 @@ Polling interval is 5 minutes at rest, 30 seconds when actively riding.
 
 ---
 
-## Manual Installation (without HACS)
+## Manual Installation (integrations, without HACS)
 
 ```bash
-# Copy the component(s) you want into your HA config directory
 cp -r custom_components/paincave      /config/custom_components/
 cp -r custom_components/intervals_icu /config/custom_components/
 cp -r custom_components/mywhoosh      /config/custom_components/

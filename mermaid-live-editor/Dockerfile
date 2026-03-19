@@ -52,11 +52,18 @@ RUN apk add --no-cache nginx
 # Copy the built static files from the builder stage
 COPY --from=builder /build/docs /var/www/mermaid
 
-# Copy config and startup files
+# Copy nginx config
 COPY nginx.conf /etc/nginx/nginx.conf
-COPY run.sh /run.sh
-RUN chmod +x /run.sh
+
+# Register nginx as an s6-overlay service.
+# The HA base image ENTRYPOINT is /init (s6-overlay) which must run as PID 1.
+# Setting CMD overrides /init and causes:
+#   s6-overlay-suexec: fatal: can only run as pid 1
+# The correct pattern: place a run script in /etc/services.d/{name}/run —
+# s6-overlay's /init discovers and starts it automatically.
+RUN mkdir -p /etc/services.d/nginx
+COPY run.sh /etc/services.d/nginx/run
+RUN chmod +x /etc/services.d/nginx/run
 
 EXPOSE 8099
-
-CMD ["/run.sh"]
+# No CMD — the base image ENTRYPOINT (/init) handles startup via s6-overlay
